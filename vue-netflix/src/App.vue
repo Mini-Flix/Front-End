@@ -1,25 +1,6 @@
 <template>
   <div id="app">
-    <header class="header">
-      <div class="left-section">
-        <img src="./assets/logo.png" alt="Miniflix" class="logo" @click="goHome" />
-        <nav class="nav-menu">
-          <a @click="goTo('/')">홈</a>
-          <a @click="goTo('/series')">시리즈</a>
-          <a @click="goTo('/movies')">영화</a>
-          <a @click="goTo('/new')">NEW</a>
-          <a @click="goTo('/trending')">요즘 대세</a>
-          <a @click="goTo('/wishlist')">찜한 콘텐츠</a>
-          <a @click="goTo('/languages')">언어별 탐색</a>
-        </nav>
-      </div>
-
-      <div class="right-section">
-        <i class="fas fa-search"></i>
-        <i class="fas fa-bell"></i>
-        <img src="./assets/avatar.png" alt="Profile" class="avatar" />
-      </div>
-    </header>
+    <Header v-if="!isAuthPage" />
 
     <main>
       <router-view />
@@ -27,15 +8,27 @@
   </div>
 </template>
 
+
 <script setup>
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
+import { computed } from 'vue';
+import Header from './components/Header.vue';
+
 const router = useRouter();
-const goHome = () => router.push('/');
+const route = useRoute(); // ✅ 이거 안 하면 route is not defined 에러 발생
+
 const goTo = (path) => router.push(path);
+const goHome = () => router.push('/');
+
+// 로그인, 회원가입, 비번 찾기 페이지에서는 헤더 숨김
+const isAuthPage = computed(() => {
+  return ['/login', '/signup', '/forgot'].includes(route.path);
+});
 </script>
 
-<style scoped>
 
+
+<style scoped>
 
 .header {
   display: flex;
