@@ -26,7 +26,7 @@ let hls = null;
 
 onMounted(() => {
   const video = videoRef.value;
-  const src = `/stream/movie/${props.movieId}/playlist.m3u8`;
+  const src = `https://d2qz0geqyx3cqt.cloudfront.net/hls/${props.movieId}/index.m3u8`;
 
   if (Hls.isSupported()) {
     hls = new Hls();

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "npm run build && aws s3 sync dist/ s3://miniflix-bucket --delete --region ap-northeast-2 && aws cloudfront create-invalidation --distribution-id E24EN8HJLVTKUC --paths '/*'"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
@@ -19,4 +20,6 @@
     "@vitejs/plugin-vue": "^5.2.2",
     "vite": "^6.3.1"
   }
+
+
 }

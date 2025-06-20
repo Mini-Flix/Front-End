@@ -19,9 +19,7 @@
 import { ref, onMounted } from 'vue';
 import HeroBanner from '../../components/HeroBanner.vue';
 import HorizontalRow from '../../components/HorizontalRow.vue';
-// 임시 목데이터
 import { mockMovies } from '../../mock/mockMovies.js';
-// 실제 API 연결 시 사용
 import { getAllMovies } from '../../api/main';
 
 const featuredMovie = ref({});
@@ -32,11 +30,9 @@ const recommendedMovies = ref([]);
 onMounted(async () => {
   try {
     const movies = await getAllMovies();
-    console.log(movies);
-    //const movies = mockMovies;
 
     featuredMovie.value = movies[0];
-    popularMovies.value = movies.slice(1, 4);
+    popularMovies.value = movies.slice(1, 7);
     newMovies.value = movies.slice(4, 7);
     recommendedMovies.value = movies.slice(7);
   } catch (error) {

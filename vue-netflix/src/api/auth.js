@@ -2,11 +2,11 @@
 import api from './api';
 
 export async function loginAPI({ email, password }) {
-  return api.post('/api/login', { email, password }); // ✅ 쿠키는 서버가 심어줌
+  return api.post('/login', { email, password }); 
 }
 
 export async function mockLoginAPI({ email, password }) {
-  if (email === 'test@test.com' && password === '1234') {
+  if (email === 'subin@gmail.com' && password === 'test1234') {
     return Promise.resolve({
       data: {
         token: 'mocked.jwt.token.value',
